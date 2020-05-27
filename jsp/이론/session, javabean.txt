@@ -1,0 +1,11 @@
+session
+클라이언트가 서버에 접속되어있는 상태
+
+Java Bean
+
+=> MS에서 주장한 component에 해당한다고 볼 수 있음.
+VC + or VB 로 component 구현
+CBD(Component Based Development)
+
+초기의 javabean은 EJB(Enterprise Java Beans) 에서 사용
+현재는 Model을 구현하는 class를 일컫는 용어로 많이 사용

@@ -1,0 +1,5 @@
+java에서 패키지명은 회사 도메인주소를 역순으로 작성 권장
+
+www.naver.com => com.naver.Member
+
+www.ourcompnay.co.kr =? kr.co.ourcompany.Member

@@ -1,0 +1,11 @@
+클라이언트가 서버에게 요청request
+서버가 클라이언트에게 응답response
+
+jsp는 동적
+(데이터베이스와의 연동)
+
+html, js, css : 브라우저
+jsp, servlet, etc : tomcat 등등
+
+Eclipse에 연동된 Tomcat은 개발(디버깅)용
+=> 설치된 Tomcat의 복제품. 별개임

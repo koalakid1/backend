@@ -1,0 +1,45 @@
+context
+어떤 information을 갖는 개체나 대상을 의미
+
+==============================
+
+get방식 요청 하는 법
+
+1. <form method = "get">
+=> form에서는 get방식이 기본값
+
+2. <a href = "/board">
+=> 링크를 이용한 요청은 get방식
+
+3. location.href = "/board"
+=> javascript location 객체를 통해서 요청. get 방식
+
+4. response.sendRedirect("/board")
+
+-> servlet의 doGet()이 호출됨.
+
+====================================
+
+post 방식 요청
+
+1. <form method = "post">
+
+2. $.ajax()에서 type : "post" 로 지정
+
+-> servlet의 doPost()가 호출됨.
+
+========================
+
+MVC패턴에서는
+Servlet을 이용해서 Controller를 작성.
+주소를 서블릿에서 지정한 주소만 이용.
+
+~.jsp로 이동하면 안됨.
+
+잘못된 예)
+
+1 <form action = "/join.jsp">
+2 <a href = "/login.jsp">
+3 location.href = "boardList.jsp";
+
+반드시 컨트롤러(Servlet)를 통해서 뷰(jsp)로 이동해야된다.
