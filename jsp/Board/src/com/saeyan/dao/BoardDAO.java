@@ -310,7 +310,34 @@ public class BoardDAO {
 		
 	}
 	
-	
+	//한개의 데이터 가져오기
+	public ReplyVO selectReply(int no){
+		String sql = "select * from reply where no = ?";
+		ReplyVO rVo = new ReplyVO();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);				
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				rVo.setNo(rs.getInt("no"));
+				rVo.setpNum(rs.getInt("pNum"));
+				rVo.setName(rs.getString("name"));
+				rVo.setPassword(rs.getString("password"));
+				rVo.setContent(rs.getString("content"));
+				rVo.setWritedate(rs.getTimestamp("writedate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return rVo;
+	}
 	
 	
 	

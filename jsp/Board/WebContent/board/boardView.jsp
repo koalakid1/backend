@@ -44,58 +44,57 @@
 
     		<br><br>
     		<!-- 댓글목록 ---------------------------------------->
-<!--     		<table class="list">    			 -->
-<%--     			<c:forEach var="reply" items="${replyList}"> --%>
-<!--     			<tr class="record" >    	 -->
-<!--     				<td style="border:none;"> -->
-<%--     					${reply.name}<br> --%>
-<%--     					<fmt:formatDate value="${reply.writedate}"/><br><br> --%>
-<%--     					<pre>${reply.content}</pre>    					 --%>
-<!--     				</td>  -->
-<!--     				<td width="20%" style="border:none;"> -->
-<%--     					<input type="button" value="수정" onclick="open_win2('${reply.no}')"> --%>
-<%--     					<input type="button" value="삭제" onclick="open_win2('${reply.no}')"> --%>
-<!--     				</td>   				 -->
-<!--     			</tr> -->
-<!--     			<tr> -->
-<!--     				<td style="border:none;" colspan="2"> -->
-<!--     					<hr> -->
-<!--     				</td> -->
-<!--     			</tr> -->
-<%--     			</c:forEach> --%>
-<!--     		</table>    		 -->
+    		<table class="list">    			
+    			<c:forEach var="reply" items="${replyList}">
+    			<tr class="record" >    	
+    				<td style="border:none;">
+    					${reply.name}<br>
+    					<fmt:formatDate value="${reply.writedate}"/><br><br>
+    					<pre>${reply.content}</pre>    					
+    				</td> 
+    				<td width="20%" style="border:none;">
+    					<input type="button" value="수정" onclick="open_win2(${reply.no})">
+    				</td>   				
+    			</tr>
+    			<tr>
+    				<td style="border:none;" colspan="2">
+    					<hr>
+    				</td>
+    			</tr>
+    			</c:forEach>
+    		</table>    		
 <!--     		댓글목록.끝. -------------------------------------- -->
 
 
 <!--     		댓글 입력 폼----------------------------------------- -->
-<!--     		<form name="frm" action="BoardServlet" method="post"> -->
-<%--     		<input type="hidden" name="pNum" value="${board.num}"> --%>
-<!--     		<input type="hidden" name="command" value="reply_write"> -->
-<!--     			<table> -->
-<!--     				<tr> -->
-<!--     					<td> -->
-<!--     						<input type="text" name="name" placeholder="name"> -->
-<!--     					</td> -->
-<!--     				</tr> -->
-<!--     				<tr> -->
-<!--     					<td> -->
-<!--     						<input type="password" name="password" placeholder="password"> -->
-<!--     					</td> -->
-<!--     				</tr> -->
-<!--     				<tr> -->
-<!--     					<td> -->
-<!--     						<textarea name="content" rows="5" cols="100" placeholder="content"></textarea> -->
-<!--     					</td> -->
-<!--     				</tr> -->
-<!--     				<tr> -->
-<!--     					<td> -->
-<!--     						<input type="submit" value="댓글등록" onclick="return replyCheck()"> -->
-<!--     					</td> -->
-<!--     				</tr>    			 -->
-<!--     			</table> -->
+    		<form name="frm" action="BoardServlet" method="post">
+    		<input type="hidden" name="pNum" value="${board.num}">
+    		<input type="hidden" name="command" value="reply_write">
+    			<table>
+    				<tr>
+    					<td>
+    						<input type="text" name="name" placeholder="name">
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<input type="password" name="password" placeholder="password">
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<textarea name="content" rows="5" cols="100" placeholder="content"></textarea>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<input type="submit" value="댓글등록" onclick="return replyCheck()">
+    					</td>
+    				</tr>    			
+    			</table>
 
 
-<!--     		</form> -->
+    		</form>
 
 
     		<!-- 댓글 입력 폼.끝.---------------------------------------->

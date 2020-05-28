@@ -1,0 +1,10 @@
+Node.js
+=>구글에서 크롬브라우저를 만들기 위해 제작한 v8 자바스크립트를 기반으로
+서버에서 동작하는 javascript run time을 만듬
+=>javascript로 backend개발 가능
+
+------------------------------------------------
+
+Node.js의 특징
+=> Async Event Driven 비동기 이벤트 방식
+=> Non Blocking I/O

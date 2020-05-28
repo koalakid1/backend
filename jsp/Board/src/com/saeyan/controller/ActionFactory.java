@@ -10,6 +10,8 @@ import com.saeyan.controller.action.BoardUpdateFormAction;
 import com.saeyan.controller.action.BoardViewAction;
 import com.saeyan.controller.action.BoardWriteAction;
 import com.saeyan.controller.action.BoardWriteFormAction;
+import com.saeyan.controller.action.ReplyUpdateAction;
+import com.saeyan.controller.action.ReplyUpdateFormAction;
 import com.saeyan.controller.action.ReplyWriteAction;
 
 //Singleton 패턴적용
@@ -53,6 +55,10 @@ public class ActionFactory {
 			action=new BoardDeleteAction();
 		}else if (command.equals("reply_write")){
 			action=new ReplyWriteAction();
+		}else if (command.equals("reply_update")){
+			action=new ReplyUpdateAction();
+		}else if (command.equals("reply_update_form")){
+			action=new ReplyUpdateFormAction();
 		}
 		
 		return action;
