@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas{
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script>
+        var c= document.getElementById("myCanvas");
+        var painter = c.getContext("2d");
+        painter.moveTo(0,0);
+        painter.lineTo(200,100);
+        painter.stroke();
+
+        painter.beginPath();
+        painter.arc(95, 50, 40, 0, 0.5*Math.PI);
+        painter.stroke();
+
+        painter.font = "30px Arial";
+        painter.fillText("Hello World", 10, 50);
+        painter.strokeText("Hello World", 10, 150);
+
+        painter.fillStyle = "#f00";
+        painter.fillRect(10, 10, 150, 80);
+
+        var img = new Image();
+        img.onload=function(){
+            c.drawImage(img,0,0);
+        }
+        img.src="img/pic1.png";
+
+    </script>
+</body>
+</html>
