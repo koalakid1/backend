@@ -1,0 +1,14 @@
+AVD(Android Virtual Device)
+안드로이드 가상 디바이스, 에뮬레이터라고도 함
+
+에뮬레이터
+H/W를 S/W적으로 구현한 것
+
+MAME
+오락실 기계인 ROM을 PC에서 구동하도록 만든 에뮬레이터
+
+Gradle
+android studio에서 사용하는 빌드도구
+
+Ant
+eclipse에서 android를 개발할 때 사용하는 빌드도구
