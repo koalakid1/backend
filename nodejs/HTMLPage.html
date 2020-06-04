@@ -19,7 +19,10 @@
         background-color: deepskyblue;
         text-shadow: none;
       }
-    .right{text-align: right;}
+    .me{text-align: right;}
+    .me span{background-color: yellow;}
+    .other{text-align: left; }
+    .other span{background-color: red;}
   </style>
   <script>
     // HTML 문서가 모두 준비되면
@@ -27,16 +30,35 @@
       // 변수를 선언합니다.
       var socket = io.connect();
       // 이벤트를 연결합니다.
-      socket.on('message', function (data) {
+      socket.on('my message', function (data) {
         // 추가할 문자열을 만듭니다.
         var output = '';
-        output+= "<div class='msg'>";
+        output+= "<div class='msg me'>";
         output += '<span>';
         output += '    <h3>' + data.name + '</h3>';
         output += '    <p>' + data.message + '</p>';
         output += '    <p>' + data.date + '</p>';
         output += '</span>';
         output += '</div>';
+
+
+        // 문서 객체를 추가합니다.
+        $(output).appendTo('#content');
+
+        // $('#content').listview('refresh');
+      });
+
+      socket.on('other message', function (data) {
+        // 추가할 문자열을 만듭니다.
+        var output = '';
+        output+= "<div class='msg other'>";
+        output += '<span>';
+        output += '    <h3>' + data.name + '</h3>';
+        output += '    <p>' + data.message + '</p>';
+        output += '    <p>' + data.date + '</p>';
+        output += '</span>';
+        output += '</div>';
+
 
         // 문서 객체를 추가합니다.
         $(output).appendTo('#content');
@@ -45,15 +67,11 @@
       });
       // 버튼을 클릭할 때
       $('button').click(function () {
-        console.log($('#content').children().eq(-1).children().children().eq(0).val());
-
-
         socket.emit('message', {
             name: $('#name').val(),
             message: $('#message').val(),
             date: new Date().toUTCString()
           });
-
       });
 
 
