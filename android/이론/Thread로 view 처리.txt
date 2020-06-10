@@ -1,0 +1,9 @@
+안드로이드에서는 Main Thread(UI Thread)에서만 view를 수정할 수 있다.
+
+Main Thread이외의 Thread에서는 view를 직접 변경할 수 없고,
+Main Thread에 변경을 요청해서 Main Thread가 직접 처리.
+
+여러가지 구현방법
+1.runOnUiThread() 사용
+
+2. AsyncTask 클래스 사용

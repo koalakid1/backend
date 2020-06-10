@@ -1,0 +1,2 @@
+rootProject.name='DBSample'
+include ':app'

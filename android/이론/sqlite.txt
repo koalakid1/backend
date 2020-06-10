@@ -1,0 +1,4 @@
+sqlite
+
+File 기반의 DataBase
+여러명의 접속자를 처리하는 Server개념의 DB와 차이가 있음.
