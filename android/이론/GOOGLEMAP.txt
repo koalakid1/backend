@@ -1,0 +1,22 @@
+구글맵
+
+웹은 유료화
+
+앱은 아직 무료
+=> KEY를 발급받아서 사용.
+
+구글맵을 띄우기위해서는 google play service 설치가 필요.
+
+인증서 지문.
+
+C9:CC:85:BF:7F:39:7E:B1:DC:AE:A5:BD:83:4B:A4:CA:EF:D1:92:06
+
+키발급시 서명 방식
+1. 인증서 지문을 발급 받는다.
+2. 1을 이용해서 디지털 서명을 해 key를 생성한다.
+
+
+
+API KEY
+AIzaSyB00EoGPsTVhFjpiAPREWcn8CMmks79W80
+key발급시 안드로이드 프로젝트의 패키지명을 입력해야됨

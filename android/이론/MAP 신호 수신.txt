@@ -1,0 +1,5 @@
+ACCESS_FINE_LOCATION
+=> GPS신호를 수신할 때 필요
+
+ACCESS_COARSE_LOCATION
+=> 기지국신호를 수신할 때 필요

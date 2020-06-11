@@ -2,8 +2,10 @@ package com.naver.threadsample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView tv1, tv2;
-    Button btn;
+    Button btn, btn2;
     SeekBar sb1, sb2;
 
     @Override
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         tv1 = (TextView)findViewById(R.id.textView);
         tv2 = (TextView)findViewById(R.id.textView2);
         btn = (Button)findViewById(R.id.button);
+        btn2 = (Button)findViewById(R.id.button2);
         sb1 = (SeekBar) findViewById(R.id.seekBar);
         sb2 = (SeekBar) findViewById(R.id.seekBar2);
 
@@ -65,5 +68,37 @@ public class MainActivity extends AppCompatActivity {
                 }.start();
             }
         });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new myAsyncTask().execute();
+            }
+        });
+    }
+
+    class myAsyncTask extends AsyncTask<String, String, Void>{
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            //주작업은 여기서 코딩
+            Log.d("========", "doInBackground()실행됨:");
+
+            for (int i = 0 ; i < 100; i++){
+                //onProgressUpdate 호출
+                publishProgress(Integer.toString(2*i), Integer.toString(i));
+                SystemClock.sleep(100); // 0.1초 지연
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... progress) {
+            sb1.setProgress(Integer.parseInt(progress[0]));
+            tv1.setText("1번진행률" + sb1.getProgress() + "%");
+            sb2.setProgress(Integer.parseInt(progress[1]));
+            tv2.setText("2번진행률" + sb2.getProgress() + "%");
+        }
     }
 }

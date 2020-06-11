@@ -1,0 +1,5 @@
+Fragment
+
+Activity보다 가벼움
+화면을 생성할 때 Activity 대신 사용가능
+GoogleMap, Tab등에서 Fragment 사용가능
