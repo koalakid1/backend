@@ -1,0 +1,7 @@
+CBD
+무겁다
+plain java가 아닌 추가된 API가 많다.
+
+Spring
+가볍다
+POJP(Plain Old Java Object) 주로 기본적인 java api를 사용

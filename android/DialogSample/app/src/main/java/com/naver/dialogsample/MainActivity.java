@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 dlg.setSingleChoiceItems(versionArray, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        button1.setText(versionArray[which]);
+
                     }
                 });
                 dlg.setPositiveButton("확인", null);
