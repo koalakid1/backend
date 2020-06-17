@@ -40,15 +40,17 @@ public class add extends AppCompatActivity {
         textViewAddDate = (TextView)findViewById(R.id.textViewAddDate);
         calendargetDate = (CalendarView)findViewById(R.id.calendargetDate);
 
+
         long now = System.currentTimeMillis();
         Date curDate = new Date(now);
 
         selectYear = curDate.getYear() + 1900;
         selectMonth = curDate.getMonth() + 1;
         selectDay = curDate.getDay();
-
         textViewAddDate.setText(Integer.toString(selectYear)+"-"+Integer.toString(selectMonth)
                 +"-"+Integer.toString(selectDay));
+
+
 
         btnAddDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +66,7 @@ public class add extends AppCompatActivity {
                 Intent o_intent = new Intent(getApplicationContext(), list.class);
                 o_intent.putExtra("date",textViewAddDate.getText());
                 o_intent.putExtra("content",editAddContent.getText().toString());
-                setResult(0,o_intent);
+                setResult(1,o_intent);
                 finish();
             }
         });

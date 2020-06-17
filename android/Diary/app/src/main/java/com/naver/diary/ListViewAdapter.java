@@ -39,20 +39,24 @@ public class ListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.listview_item, parent, false);
         }
 
+        TextView numTextView = (TextView) convertView.findViewById(R.id.textViewNum);
         TextView dateTextView = (TextView) convertView.findViewById(R.id.textViewDate);
         TextView contentTextView = (TextView) convertView.findViewById(R.id.textViewContent);
 
         ListViewItem listViewItem = listViewItemArrayList.get(pos);
 
+
+        numTextView.setText(listViewItem.getNum());
         dateTextView.setText(listViewItem.getDate());
         contentTextView.setText(listViewItem.getContent());
 
         return convertView;
     }
 
-    public void addItem(String date, String content){
+    public void addItem(String num, String date, String content){
         ListViewItem item = new ListViewItem();
 
+        item.setNum(num);
         item.setDate(date);
         item.setContent(content);
 

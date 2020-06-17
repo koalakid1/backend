@@ -1,0 +1,7 @@
+1. (sql) tblboard table을 만든다.
+2. VO를 만든다. boardVO
+3. DAO를 만든다. boardDAO
+2,3 model
+번외. DB Manager - db 커넥션과 클로즈를 이젠 mybatis가 담당
+4.controller를 만든다. @Controller Class
+5.View를 만든다. jsp

@@ -1,0 +1,18 @@
+Code Convention 코딩 규칙
+팀 프로젝트를 위해 코딩하는 스타일 표준을 미리 정함
+단위테스트 후 통합할 때 중요
+
+Naming Rule 명명 규칙
+-패키지
+-클래스
+-메서드
+-상수
+-변수
+-콤포넌트
+-테이블,컬럼
+...
+
+   ex) btnInsert, txtName, edtId
+	tblStudent,
+	Student - s_id, s_name, s_pw,
+

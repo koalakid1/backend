@@ -30,8 +30,7 @@ public class list extends AppCompatActivity {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            Log.d("dd", "dd");
-            db.execSQL("create table diary(d_date char(10), d_content char(1000))");
+            db.execSQL("create table diary(num integer primary key, d_date char(10), d_content char(1000))");
         }
 
         @Override
@@ -42,17 +41,18 @@ public class list extends AppCompatActivity {
         }
     }
     public void addColumn(SQLiteDatabase sqlDB, String date, String content){
-        sqlDB.execSQL("insert into diary values('"+date+"', '"+content+"')");
+        sqlDB.execSQL("insert into diary(d_date, d_content) values('"+date+"', '"+content+"')");
         sqlDB.close();
     }
 
-    public void updateColumn(SQLiteDatabase sqlDB, String date, String content){
-        sqlDB.execSQL("insert into diary values('"+date+"', '"+content+"')");
+    public void updateColumn(SQLiteDatabase sqlDB, String date, String content, String num){
+        sqlDB.execSQL("update diary set d_date = '" + date + "', d_content = '"+content+"'"
+                        + " where num = '" + num + "'");
         sqlDB.close();
     }
 
-    public void deleteColumn(SQLiteDatabase sqlDB, String date, String content){
-        sqlDB.execSQL("insert into diary values('"+date+"', '"+content+"')");
+    public void deleteColumn(SQLiteDatabase sqlDB, String num){
+        sqlDB.execSQL("delete from diary where num = '"+ num +"'");
         sqlDB.close();
     }
 
@@ -62,7 +62,8 @@ public class list extends AppCompatActivity {
         Cursor cursor = sqlDB.rawQuery("select * from diary",null);
 
         while (cursor.moveToNext()) {
-            adapter.addItem(cursor.getString(0), cursor.getString(1));
+            Log.d("되냐 이거?", String.valueOf(cursor.getInt(0)));
+            adapter.addItem(cursor.getString(0), cursor.getString(1), cursor.getString(2));
         }
 
         listView.setAdapter(adapter);
@@ -84,8 +85,9 @@ public class list extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListViewItem item = (ListViewItem) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), item.class);
+                intent.putExtra("num", item.getNum());
                 intent.putExtra("date", item.getDate());
-                intent.putExtra("context", item.getContent());
+                intent.putExtra("content", item.getContent());
                 startActivityForResult(intent, 1);
             }
         });
@@ -111,9 +113,9 @@ public class list extends AppCompatActivity {
         }
         else{
             if (resultCode == 1){
-
+                updateColumn(myDiaryDB.getWritableDatabase(),data.getStringExtra("date"),data.getStringExtra("content"),data.getStringExtra("num"));
             } else if (resultCode == 2){
-
+                deleteColumn(myDiaryDB.getWritableDatabase(),data.getStringExtra("num"));
             }
         }
         selectColumn(myDiaryDB.getReadableDatabase(),diaryList);
