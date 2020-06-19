@@ -15,8 +15,10 @@
       
       checkModal(result);
       
+      history.replaceState({},null,null); //history.state를 null로 변경
+      
       function checkModal(result){
-         if(result===''){
+         if(result==='' || history.state){
             return;
          }
          if(parseInt(result)>0){
@@ -31,6 +33,14 @@
          self.location="/board/register";
       });
       // 등록 버튼 클릭 (끝) ------->
+      
+      var actionForm = $("#actionForm");
+      $(".paginate_button a").on("click",function(e){
+    	  e.preventDefault();
+    	  console.log("click");
+    	  actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    	  actionForm.submit();
+      });
    });
    
 </script>
@@ -68,7 +78,7 @@
 							<tr>
 								<td width="50"><c:out value="${board.bno}" /></td>
 								<td width="330">
-									<a href="/board/get?bno=<c:out value="${board.bno}" />">
+									<a href="/board/get?bno=<c:out value='${board.bno}'/>">
 										<c:out value="${board.title}" />
 									</a>
 								</td>
@@ -81,6 +91,36 @@
 						</c:forEach>
 					</table>
 					<!-- /.table-responsive -->
+					
+					<!-- paging ---------------------------------->
+					<div class="pull-right">
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li class="paginate_button previous">
+									<a href="${pageMaker.startPage-1}">Previous</a>
+								</li>
+							</c:if>
+							
+							<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+								<li class="paginate_button ${pageMaker.cri.pageNum==num?"active":"" }">
+									<a href="${num}">${num}</a>
+								</li>
+							</c:forEach>
+							
+							<c:if test="${pageMaker.next}">
+								<li class="paginate_button next">
+									<a href="${pageMaker.endPage+1}">Next</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
+					
+					<form action="/board/list" method="get" id="actionForm">
+						<input type="hidden" name="pageNum" value = '${pageMaker.cri.pageNum}'>
+						<input type="hidden" name="amount" value = '${pageMaker.cri.amount}'>
+					</form>
+					
+					<!-- paging -->
 					<!-- Modal ------------------------------------>
 					<div id="myModal" class="modal fade" role="dialog">
 						<div class="modal-dialog">

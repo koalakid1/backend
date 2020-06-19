@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 import org.zerock.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -17,12 +18,20 @@ public class BoardServiceImpl implements BoardService{
 	private BoardMapper mapper;
 	
 	//목록
+//	@Override
+//	public List<BoardVO> getList() {
+//		log.info("getList.....");
+//		
+//		return mapper.getList();
+//	}
+	
+	//목록 w/ paging
 	@Override
-	public List<BoardVO> getList() {
-		log.info("getList.....");
-		
-		return mapper.getList();
+	public List<BoardVO> getList(Criteria cri) {
+		log.info("getList w/ criteria : " + cri);
+		return mapper.getListWithPaging(cri);
 	}
+
 	
 	//등록
 	@Override
@@ -39,6 +48,20 @@ public class BoardServiceImpl implements BoardService{
 		log.info("get...." + bno);
 		return mapper.read(bno);
 	}
+	
+	//수정하기
+	@Override
+	public boolean modify(BoardVO board) {
+		log.info("modify...." + board);
+		return mapper.update(board) == 1;
+	}
+
+	@Override
+	public boolean remove(Long bno) {
+		log.info("delete...." + bno);
+		return mapper.delete(bno) == 1;
+	}
+
 
 
 }

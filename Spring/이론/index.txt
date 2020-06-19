@@ -1,0 +1,22 @@
+index
+
+=> select 속도를 향상하기 위해 사용
+=> 특정 컬럼으로 index를 생성하면 컬럼의 값으로 정렬되어 index가 생성됨
+
+select 절의 order by
+=> 정렬할 때 사용
+=> 행의 수가 많을 때는 order by 구문을 사용하면 속도가 느리다
+
+index를 활용하면 이미 정렬이 되어 있으므로 order by를 하지 않아도 됨
+속도를 향상할 수 있음
+
+index hint
+=> Query Optimizer의 판단이 아닌 index hint에 작성한 대로 동작
+
+index 사용시 고려할 점
+
+1. 데이터 분포
+indexing 하는 컬럼의 값이 전체 행의 15%를 넘게 분포되면 indexing효과가 감소
+
+2. where 절의 컬럼을 분석해서 인덱싱
+where address like '서울%' and age => 20
