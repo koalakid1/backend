@@ -1,0 +1,15 @@
+title = T
+content = C
+writer = W
+
+TC 
+title과 content에서 검색
+
+title like '%spring%' or content like '%spring%'
+
+TCW
+title,content와 writer에서 검색
+
+javascript
+
+0, false, null, "" : 호환가능

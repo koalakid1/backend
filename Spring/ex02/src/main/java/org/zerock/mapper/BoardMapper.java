@@ -10,6 +10,8 @@ public interface BoardMapper {
 	public List<BoardVO> getList();
 	//목록 with paging
 	public List<BoardVO> getListWithPaging(Criteria cri);
+	//전체글수
+	public int getTotalCount(Criteria cri);
 	//등록
 	public void insert(BoardVO board);
 	//bno를 받은채로 등록

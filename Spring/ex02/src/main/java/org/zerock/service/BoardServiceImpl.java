@@ -31,7 +31,13 @@ public class BoardServiceImpl implements BoardService{
 		log.info("getList w/ criteria : " + cri);
 		return mapper.getListWithPaging(cri);
 	}
-
+	
+	//전체글수
+	@Override
+	public int getTotalCount(Criteria cri) {
+		log.info("get Total Count");
+		return mapper.getTotalCount(cri);
+	}
 	
 	//등록
 	@Override
@@ -61,6 +67,8 @@ public class BoardServiceImpl implements BoardService{
 		log.info("delete...." + bno);
 		return mapper.delete(bno) == 1;
 	}
+
+
 
 
 

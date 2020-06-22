@@ -41,7 +41,43 @@
     	  actionForm.find("input[name='pageNum']").val($(this).attr("href"));
     	  actionForm.submit();
       });
+      
+      $(".move").on("click", function(e){
+    	  e.preventDefault(); //다른페이지로 이동을 막음
+    	  actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
+    	  actionForm.attr("action","/board/get");
+    	  actionForm.submit();
+      });
+      
+      var searchForm = $("#searchForm");
+      
+      $("#searchForm button").on("click", function(e){
+    	
+    	  if(!searchForm.find("option:selected").val()){
+    		  alert("검색종류를 선택하세요");
+    		  return false;
+    	  }
+    	  
+    	  if(!searchForm.find("input[name='keyword']").val()){
+    		  alert("키워드를 입력하세요");
+    		  return false;
+    	  }
+    	  
+    	  searchForm.find("input[name='pageNum']").val("1");
+    	  e.preventDefault();
+    	  
+    	  
+    	  searchForm.submit();
+    	  
+      });
+      
+      
    });
+   
+   function selChange(){
+  	  $("#amount").submit();
+    }
+    
    
 </script>
 <!-- 컨텐츠 ---------------------------------------->
@@ -60,12 +96,30 @@
 					글 목록
 					<button id="regBtn" type="button" class="btn btn-primary btn-xs pull-right">글쓰기</button>
 				</div>
+				
+				
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<table width="100%"
 						class="table table-striped table-bordered table-hover"
 						id="dataTables-example">
 						<thead>
+							<form action="/board/list" id="amount" method="get" >
+								<input type="hidden" name="type" value="${pageMaker.cri.type}">
+								<input type="hidden" name="keyword" value="<c:out value='${pageMaker.cri.keyword}'/>" />
+								<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+								<select name="amount" onchange="selChange()" style="float:right;">
+									<option value="5"
+<%-- 										<c:if test="${pageMaker.cri.amount == 5}">selected</c:if> --%>
+										>5줄 보기</option>
+									<option value="10"
+										<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10줄 보기</option>
+									<option value="15"
+										<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15줄 보기</option>
+									<option value="20"
+										<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20줄 보기</option>
+								</select>
+							</form>
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
@@ -78,9 +132,12 @@
 							<tr>
 								<td width="50"><c:out value="${board.bno}" /></td>
 								<td width="330">
-									<a href="/board/get?bno=<c:out value='${board.bno}'/>">
-										<c:out value="${board.title}" />
-									</a>
+<%-- 									<a href="/board/get?bno=<c:out value='${board.bno}'/>"> --%>
+<%-- 										<c:out value="${board.title}" /> --%>
+<!-- 									</a> -->
+										<a class="move" href="<c:out value='${board.bno}'/>">
+											<c:out value="${board.title}"/>
+										</a>
 								</td>
 								<td><c:out value="${board.writer}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -91,6 +148,30 @@
 						</c:forEach>
 					</table>
 					<!-- /.table-responsive -->
+						
+					<!-- 검색창 ---------------------------->
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<form action="/board/list" id="searchForm" method="get">
+								<select name="type">
+									<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>								
+									<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+									<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+									<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+									<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}"/>>제목 or 내용</option>
+									<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
+									<option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+								</select>
+								<input type="text" name="keyword" value="<c:out value='${pageMaker.cri.keyword}'/>" />
+								<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+								<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+								<button class="btn btn-default">Search</button>
+							</form>
+						</div>
+					</div>
+					
+					<!-- 검색창 -->
 					
 					<!-- paging ---------------------------------->
 					<div class="pull-right">
@@ -118,6 +199,8 @@
 					<form action="/board/list" method="get" id="actionForm">
 						<input type="hidden" name="pageNum" value = '${pageMaker.cri.pageNum}'>
 						<input type="hidden" name="amount" value = '${pageMaker.cri.amount}'>
+						<input type="hidden" name="type" value="<c:out value='${pageMaker.cri.type}'/>">
+						<input type="hidden" name="keyword" value="<c:out value='${pageMaker.cri.keyword}'/>">
 					</form>
 					
 					<!-- paging -->
@@ -142,6 +225,7 @@
 
 						</div>
 					</div>
+					<!-- Modal -->
 
 				</div>
 				<!-- /.panel-body -->

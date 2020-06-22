@@ -13,12 +13,26 @@
 				var operation = $(this).data("oper"); // data-oper 속성값을 구함
 				console.log(operation);
 				if(operation === "remove"){
-					formObj.attr("action","/board/remove"); // form의 action 값을 변경
+					if(confirm("정말 삭제하시겠습니까?") == true){
+						formObj.attr("action","/board/remove"); // form의 action 값을 변경
+					}
+					else{
+						return false;
+					}
 				}else if (operation === "list"){
 // 					self.location = "/board/list"; // 목록으로 이동
 // 					return;
 					formObj.attr("action","/board/list").attr("method","get");
-					formObj.empty;
+					var pageNumTag = $("input[name='pageNum']").clone();
+					var amountTag = $("input[name='amount']").clone();
+					var keywordTag = $("input[name='keyword']").clone();
+					var typeTag = $("input[name='type']").clone();
+					
+					formObj.empty();
+					formObj.append(pageNumTag);
+					formObj.append(amountTag);
+					formObj.append(keywordTag);
+					formObj.append(typeTag);
 				}
 				formObj.submit();
 			});
@@ -43,6 +57,10 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                         	<form method="post" action="/board/modify" role="form">
+                        		<input type="hidden" name="pageNum" value="<c:out value='${cri.pageNum}'/>">
+                        		<input type="hidden" name="amount" value="<c:out value='${cri.amount}'/>">
+                        		<input type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>">
+                        		<input type="hidden" name="type" value="<c:out value='${cri.type}'/>">
 	                        	<div class="form-group">
 	                       			<label>글번호</label>		
 	                       			<input class="form-control" name="bno" value ='<c:out value="${board.bno}" />' >

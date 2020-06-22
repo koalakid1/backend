@@ -9,6 +9,8 @@ public interface BoardService {
 	//목록
 //	public List<BoardVO> getList();
 	public List<BoardVO> getList(Criteria cri); 
+	//전체글수
+	public int getTotalCount(Criteria cri);
 	//등록
 	public void register(BoardVO board);
 	//상세보기
