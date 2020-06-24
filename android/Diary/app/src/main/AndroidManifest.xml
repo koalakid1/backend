@@ -13,7 +13,8 @@
         <activity android:name=".add" />
         <activity android:name=".item" />
         <activity android:name=".list" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

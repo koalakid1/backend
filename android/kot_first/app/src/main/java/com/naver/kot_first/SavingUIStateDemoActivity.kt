@@ -2,9 +2,7 @@ package com.naver.kot_first
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class SavingUIStateDemoActivity : AppCompatActivity() {
@@ -39,6 +37,16 @@ class SavingUIStateDemoActivity : AppCompatActivity() {
             numberText.text = num.toString()
         }
         Log.d("mytag", "onCreate")
+
+        var toast : Toast = Toast.makeText( applicationContext, "Toast Message (Short)", Toast.LENGTH_SHORT)
+        val spinner = findViewById<Spinner>(R.id.spinner)
+// (1)
+        val adapter = ArrayAdapter.createFromResource(applicationContext, R.array, android.R.layout.simple_spinner_item)
+// (2)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+// (3)
+        spinner.adapter = adapter
+
     }
 
     // onDestroy 재정의 및 로그 메시지 출력 코드 추가
