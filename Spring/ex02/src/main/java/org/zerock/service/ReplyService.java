@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.zerock.domain.Criteria;
+import org.zerock.domain.ReplyDTO;
 import org.zerock.domain.ReplyVO;
 
 
@@ -22,4 +23,5 @@ public interface ReplyService {
 	//조회 w/ paging 처리
 	public List<ReplyVO> getList(Criteria cri, Long bno);
 	
+	public ReplyDTO getListPage(Criteria cri, Long bno);
 }
