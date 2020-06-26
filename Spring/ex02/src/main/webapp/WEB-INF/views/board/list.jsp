@@ -136,8 +136,13 @@
 <%-- 										<c:out value="${board.title}" /> --%>
 <!-- 									</a> -->
 										<a class="move" href="<c:out value='${board.bno}'/>">
-											<c:out value="${board.title}"/>
+											<c:out value="${board.title}"/> 
 										</a>
+										<c:if test="${board.replyCnt!=0}">
+											<span class="badge">	
+												<c:out value="${board.replyCnt}"/>
+											</span>
+										</c:if>
 								</td>
 								<td><c:out value="${board.writer}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"

@@ -171,7 +171,7 @@
 						console.log(replyn);
 						console.log(pageNum);
 						
-						if(pageNum == endn && replyn%10 == 1){
+						if(pageNum > 1 && pageNum == endn && replyn%10 == 1){
 							pageNum--;
 						}
 						showList(pageNum);
