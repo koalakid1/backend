@@ -40,15 +40,17 @@
 	<style>
 		*{padding: 0; margin: 0;}
 		.bigPictureWrapper{
-			position: absolute;
+			position: fixed;
 			display: none;
 			justify-content: center;
 			align-items: center;
 			top: 0%;
+			left: 0%;
 			width: 100%;
 			height: 100%;
-			background-color: gray;
-			z-index: 100;
+			background-color: #EEE;
+			z-index: 1000;
+			background: rgba(255,255,255,0.5);
 		}
 	
 		.bigPicture{
@@ -64,7 +66,7 @@
 	
 		.uploadResult {
 			width: 100%;
-			background-color: gray;
+			background-color: #EEE;
 		}
 		
 		.uploadResult ul {
@@ -86,7 +88,7 @@
 		}
 		
 		.uploadResult ul li span{
-			color:white;
+			color:black;
 		}
 	</style>
 	<script>

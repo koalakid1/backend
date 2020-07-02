@@ -6,15 +6,17 @@
 	<style>
 		*{padding: 0; margin: 0;}
 		.bigPictureWrapper{
-			position: absolute;
+			position: fixed;
 			display: none;
 			justify-content: center;
 			align-items: center;
 			top: 0%;
+			left: 0%;
 			width: 100%;
 			height: 100%;
-			background-color: gray;
-			z-index: 100;
+			background-color: #EEE;
+			z-index: 1000;
+			background: rgba(255,255,255,0.5);
 		}
 	
 		.bigPicture{
@@ -30,7 +32,7 @@
 	
 		.uploadResult {
 			width: 100%;
-			background-color: gray;
+			background-color: #EEE;
 		}
 		
 		.uploadResult ul {
@@ -43,9 +45,16 @@
 		.uploadResult ul li {
 			list-style: none;
 			padding: 10px;
+			align-content: center;
+			text-align: center;
 		}
+		
 		.uploadResult ul li img {
-			width: 20px;
+			width: 100px;
+		}
+		
+		.uploadResult ul li span{
+			color:black;
 		}
 		
 	</style>
@@ -142,6 +151,7 @@
 							str += "<i class='fa fa-times'></i></button><br>";
 							str += "<img src='/resources/img/attach.jfif'>";
 							str += "</div></li>";
+							console.log(fileCallPath);
 							
 						}else {
 // 							str += "<li>" + obj.fileName + "</li>";
@@ -153,7 +163,7 @@
 // 							originPath = originPath.replace(new RegExp(/\\/g),"/");
 							
 							str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
-							str += "<span>" + obj.fileName + "</span>";
+								str += "<span>" + obj.fileName + "</span>";
 							str += "<button type='button' data-file=\'"+ fileCallPath +"\' data-type='image' class='btn btn-warning btn-circle'>";
 							str += "<i class='fa fa-times'></i></button><br>";
 							str += "<img src='/display?fileName="+fileCallPath+"'>";
@@ -168,6 +178,8 @@
 				console.log("delete file");
 				
 				var targetFile = $(this).data("file");
+				
+
 				var type = $(this).data("type");
 				
 				var targetLi = $(this).closest("li");
@@ -182,6 +194,7 @@
 						targetLi.remove();
 					}
 				});
+
 			});
 		});
 	
