@@ -1,0 +1,5 @@
+spring security에서 DB를 이용한 인증처리
+
+1. spring security에서 정해놓은 users테이블, authorities를 사용하는 방법
+
+2. 개발자가 직접 만든 회원테이블(member)을 사용하는 방법
