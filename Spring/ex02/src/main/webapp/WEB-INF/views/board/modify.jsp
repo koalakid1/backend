@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header.jsp" %>
 
 <style>
@@ -116,42 +116,10 @@
 				return true;
 			}
 			
+
 			
-			//드래그앤드롭을 이용해서  파일업로드
-			$(".uploadResult").on("dragenter dragover",function(e){
-				e.preventDefault();//파일이 새롭게 열리는 것을 막는다.
-			});
-			$(".uploadResult").on("drop",function(e){
-				e.preventDefault();//파일이 새롭게 열리는 것을 막는다.
-				
-				var files=e.originalEvent.dataTransfer.files;
-				//formData객체에 업로드할 파일들을 추가
-				var formData=new FormData();
-				for(i=0;i<files.length;i++){
-					formData.append("uploadFile",files[i]);
-				}
-				
-				
-				$.ajax({
-					url: '/uploadAjaxAction',
-					processData:false,
-					contentType:false,
-					data:formData,
-					type:'POST',
-					dataType:'json',
-					success:function(result){
-						console.log(result);
-						
-						//파일목록
-						showUploadResult(result);
-						
-						//<input type='file'>초기화
-						//$(".uploadDiv").html(cloneObj.html());
-					}
-				});
-				
-			});
-			
+			var csrfHeaderName = "${_csrf.headerName}";
+			var csrfTokenValue = "${_csrf.token}";
 			
 			
 			//파일업로드
@@ -171,6 +139,7 @@
 					processData:false,
 					contentType:false,
 					data:formData,
+					beforeSend:function(xhr){xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)},
 					type:'POST',
 					dataType:'json',
 					success:function(result){
@@ -294,6 +263,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                         	<form role="form" action="/board/modify" method="post">
+                        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                         		<input type="hidden" name="pageNum" value="<c:out value='${cri.pageNum}'/>">
                         		<input type="hidden" name="amount" value="<c:out value='${cri.amount}'/>">
                            		<input type="hidden" name="type" value='<c:out value="${cri.type}"/>'>

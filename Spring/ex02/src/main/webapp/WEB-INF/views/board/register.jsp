@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp" %>
 <style>
@@ -50,6 +51,7 @@
 </style>
 <script>
 $(document).ready(function(){
+	
 	function showUploadResult(uploadResultArr){
 		//첨부파일목록이 없으면 중지
 		if(!uploadResultArr || uploadResultArr.length==0){
@@ -113,6 +115,8 @@ $(document).ready(function(){
 		return true;
 	}
 	
+
+	
 	/* 삭제처리 ***************************************************************/
 	$(".uploadResult").on("click","button",function(e){
 		var targetFile=$(this).data("file"); // data-file의 값을 추출
@@ -122,6 +126,7 @@ $(document).ready(function(){
 		$.ajax({
 			url: '/deleteFile',
 			data: {fileName: targetFile, type: type},
+			beforeSend:function(xhr){xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)},
 			dataType: 'text',
 			type: 'POST',
 			success: function(result){
@@ -151,42 +156,8 @@ $(document).ready(function(){
 	});	
 	/* 등록처리.끝. */
 	
-	//드래그앤드롭을 이용해서  파일업로드
-	$(".uploadResult").on("dragenter dragover",function(e){
-		e.preventDefault();//파일이 새롭게 열리는 것을 막는다.
-	});
-	$(".uploadResult").on("drop",function(e){
-		e.preventDefault();//파일이 새롭게 열리는 것을 막는다.
-		
-		var files=e.originalEvent.dataTransfer.files;
-		//formData객체에 업로드할 파일들을 추가
-		var formData=new FormData();
-		for(i=0;i<files.length;i++){
-			formData.append("uploadFile",files[i]);
-		}
-		
-		
-		$.ajax({
-			url: '/uploadAjaxAction',
-			processData:false,
-			contentType:false,
-			data:formData,
-			type:'POST',
-			dataType:'json',
-			success:function(result){
-				console.log(result);
-				
-				//파일목록
-				showUploadResult(result);
-				
-				//<input type='file'>초기화
-				//$(".uploadDiv").html(cloneObj.html());
-			}
-		});
-		
-	});
-	
-	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
 	
 	//파일찾기버튼을 이용해서 파일업로드	
 	$("input[type='file']").change(function(e){
@@ -204,6 +175,7 @@ $(document).ready(function(){
 			url: '/uploadAjaxAction',
 			processData:false,
 			contentType:false,
+			beforeSend:function(xhr){xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)},
 			data:formData,
 			type:'POST',
 			dataType:'json',
@@ -247,6 +219,7 @@ $(document).ready(function(){
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <form role="form" action="/board/register" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             	<div class="form-group">
                             		<label>Title</label>
                             		<input class="form-control" name="title">
@@ -257,7 +230,7 @@ $(document).ready(function(){
                             	</div>
                             	<div class="form-group">
                             		<label>Writer</label>
-                            		<input class="form-control" name="writer">                            		
+                            		<input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">                            		
                             	</div>
                             	<button type="submit" class="btn btn-default">등록</button>
                             	<button type="reset" class="btn btn-default">취소</button>

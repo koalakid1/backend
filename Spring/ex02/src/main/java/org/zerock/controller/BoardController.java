@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,9 +52,11 @@ public class BoardController {
 	
 	//등록화면
 	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public void register() {}
 	//등록처리
 	@PostMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		log.info("=====================================");
 		log.info("register: " + board);
@@ -85,6 +88,7 @@ public class BoardController {
 	
 	//수정처리
 	@PostMapping("/modify")
+	@PreAuthorize("principal.username == #board.writer")
 	public String modify(BoardVO board,@ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
 		log.info("/modify");
 		if(service.modify(board)) {
@@ -101,6 +105,7 @@ public class BoardController {
 	
 	//삭제처리
 	@PostMapping("/remove")
+	@PreAuthorize("principal.username == #writer")
 	public String remove(@RequestParam("bno")Long bno,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("/remove");
 		
