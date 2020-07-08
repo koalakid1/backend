@@ -10,7 +10,9 @@
 <h1>
 	게시판
 </h1>
-
+<script>
+	self.location = "/board/list";
+</script>
 <P>  <a href="/board/list">게시판으로 이동</a> </P>
 </body>
 </html>
