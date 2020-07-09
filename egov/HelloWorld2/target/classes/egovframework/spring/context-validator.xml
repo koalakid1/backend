@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	
-    <bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
+    <bean class="org.springmodules.validation.commons.DefaultBeanValidator" id="beanValidator">
         <property name="validatorFactory" ref="validatorFactory"/>
     </bean>
 
-    <bean id="validatorFactory" class="org.springmodules.validation.commons.DefaultValidatorFactory">
+    <bean class="org.springmodules.validation.commons.DefaultValidatorFactory" id="validatorFactory">
         <property name="validationConfigLocations">
             <list>
                 <value>/WEB-INF/config/egovframework/validator/validator-rules.xml</value>
                 <value>/WEB-INF/config/egovframework/validator/validator.xml</value>
-            </list>
+            				<value>classpath:/egovframework/validator/com-rules.xml</value>
+				<value>classpath:/egovframework/validator/validator-rules.xml</value>
+				<value>classpath:/egovframework/validator/**/*.xml</value>
+</list>
         </property>
     </bean>
    
