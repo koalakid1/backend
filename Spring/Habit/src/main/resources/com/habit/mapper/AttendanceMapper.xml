@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.habit.mapper.AttendanceMapper">
+
+<resultMap type="com.habit.domain.AttendanceVO" id="attendanceMap">
+	<id property="m_num" column="m_num"/>
+	<id property="c_num" column="c_num"/>
+	<id property="b_writeDate" column="b_writeDate"/>
+	<collection property="memberList" resultMap="memberMap"></collection>
+	<collection property="categoryList" resultMap="categoryMap"></collection>
+</resultMap>
+
+<resultMap type="com.habit.domain.MemberVO" id="memberMap">
+	<id property="m_num" column="m_num"/>
+	<result property="m_email" column="m_email"/>
+	<result property="m_name" column="m_name"/>
+	<result property="m_pw" column="m_pw"/>
+	<result property="m_role" column="m_role"/>
+	<result property="m_rank" column="m_rank"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.CategoryVO" id="categoryMap">
+	<id property="c_num" column="c_num"/>
+	<result property="c_name" column="c_name"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.AttendanceDTO" id="attendanceDTOMap">
+	<result property="c_name" column="c_name"/>
+	<result property="categoryCnt" column="categoryCnt"/>
+</resultMap>
+
+<select id="getList" resultMap="attendanceMap">
+	select hcategory.c_name, to_char(hattendance.b_writeDate, 'yyyy-MM-dd') as b_writeDate
+	from hcategory, hattendance
+	where hcategory.c_num = hattendance.c_num
+	and hattendance.m_num = #{m_num}
+</select>
+
+<select id="getListWithCategory" resultMap="attendanceDTOMap">
+	select hcategory.c_name, count(*) as categoryCnt
+    from hattendance INNER JOIN hcategory ON hcategory.c_num = hattendance.c_num
+    where hattendance.m_num = #{m_num}
+    and hattendance.b_writedate BETWEEN TRUNC(SYSDATE)-TO_CHAR(SYSDATE,'DD') AND TRUNC(LAST_DAY(SYSDATE))+0.99999421
+    group by hcategory.c_name
+</select>
+</mapper>

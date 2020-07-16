@@ -13,5 +13,5 @@ public class ReplyDTO {
 	
 	private int replyCnt;
 	private List<ReplyVO> list;
-
+	
 }
