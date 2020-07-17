@@ -32,7 +32,7 @@
 </resultMap>
 
 <select id="getList" resultMap="attendanceMap">
-	select hcategory.c_name, to_char(hattendance.b_writeDate, 'yyyy-MM-dd') as b_writeDate
+	select hcategory.c_name, hattendance.b_writeDate
 	from hcategory, hattendance
 	where hcategory.c_num = hattendance.c_num
 	and hattendance.m_num = #{m_num}

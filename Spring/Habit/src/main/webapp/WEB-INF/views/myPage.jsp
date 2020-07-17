@@ -34,7 +34,8 @@
     <link href='/resources/packages/timegrid/main.css' rel='stylesheet' />
     <link href='/resources/packages/list/main.css' rel='stylesheet' />
     
-	
+	<!-- fontawsome cdn-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 	<script src="/resources/js/jquery.min.js"></script>
   <script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script>
@@ -88,7 +89,6 @@
             center: 'title',
             right: 'next'
           },
-          locale: 'ko',
           editable: false,
           navLinks: false, // can click day/week names to navigate views
           eventLimit: true, // allow "more" link when too many events
@@ -148,7 +148,16 @@
         margin: 40px auto;
         padding: 0 10px;
       }
+		
+	  /* chat 아이콘*/
+    .icon-chat {
+      color: #589bf3c5;
+    }
 
+    /*좋아요 아이콘*/
+    .fa-thumbs-up {
+      color: #f358d1cb;
+    }
     </style>
 </head>
 <body>
@@ -160,7 +169,7 @@
         <div class="row">
           <!-- 프로필 수정 -->
           <div class="col-md-4 sidebar ftco-animate">
-            <div class="sidebar-box ftco-animate" style="border: 1px; background-color:rgba(0, 0, 0, 0.1); ">
+            <div class="sidebar-box ftco-animate" style="border: 1px solid rgba(0, 0, 0,0.2); background-color:rgba(230, 230, 230,0.2); ">
               <img src="/resources/images/person_1.jpg" alt="Image placeholder" style="width: 100%;">
               <h2 style="margin-top: 30px;"><c:out value="${member.m_name}"/></h2>
               <h3 style="margin-bottom: 30px;"><c:out value="${member.m_email}"/></h3>
@@ -178,6 +187,9 @@
                   <td style="width: 220px; height: 50px;"><c:out value="${member.m_rank}"/></td> 
                 </tr>
               </table>
+              <div class="col text-center">
+			  	<button class="btn" style="margin-top:10px; background:#787878; color:white;">회원 정보 수정</button>
+			  </div>
             </div>
           </div>
           <div class="col-md-8 order-md-last ftco-animate">
@@ -203,51 +215,27 @@
 
 
             <!-- 내가 작성한 글 -->
-            <div class="sidebar-box ftco-animate">
-              <div class="col-md-12 heading-section text-center ftco-animate mb-5" style="margin-top: 90px;">
+            <div class="sidebar-box ftco-animate" style="margin-top: 50px; ">
+              <div class="col-md-12 heading-section text-center ftco-animate mb-5" style="margin-top: 30px">
                 <span class="subheading">Habit, HAVE IT!</span>
                 <h2 class="mb-2">내가 쓴 글</h2>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">제가 매일 운동을 결심했던 이유</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.20</a></div>
-                    <div><a href="#">해빗이</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                    <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                    <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">일기쓰기가 습관이 되었습니다</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.23</a></div>
-                    <div><a href="#">습관지키미</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                    <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                    <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">습관 30일차! 한달 성공기</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.24</a></div>
-                    <div><a href="#">내일로</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                    <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                    <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-
+              <c:forEach items="${myBoardList}" var="board">
+              	<div class="block-21 mb-4 d-flex" style="border: 1px solid rgba(0, 0, 0,0.2); background-color:rgba(230, 230, 230,0.2); padding:10px;">
+	                <a href="/board/list?b_num=<c:out value='${board.b_num}'/>" class="blog-img mr-4" style="background-image: url(/resources/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h2 class="heading"><a href="/board/list?b_num=<c:out value='${board.b_num}'/>">[<c:out value="${board.c_name}"/>] <c:out value="${board.b_title}"/></a></h2>
+	                  <div class="meta mb-3">
+	                    <div><fmt:formatDate value="${board.b_writeDate}"/></div>
+	                    <div><c:out value="${board.m_name}"/></a></div>
+	                    <div><span class="icon-chat"></span> <c:out value="${board.b_replyCount}"/></div>
+	                    <div><span class="fas fa-user-clock"></span> <c:out value="${board.b_readCount}"/></div>
+	                    <div><span class="far fa-thumbs-up"></span> <c:out value="${board.b_likeCount}"/></div>
+	                  </div>
+	                </div>
+	             </div>
+              </c:forEach>
+             
               <div class="col text-center">
                 <div class="block-27">
                   <ul>
@@ -264,51 +252,29 @@
             </div>
 
             <!-- 내가 좋아요 한 글 -->
-            <div class="sidebar-box ftco-animate">
-              <div class="col-md-12 heading-section text-center ftco-animate mb-5" style="margin-top: 60px;">
+            <div class="sidebar-box ftco-animate" style="margin-top:50px; ">
+              <div class="col-md-12 heading-section text-center ftco-animate mb-5" style="margin-top: 30px;">
                 <span class="subheading">Habit, HAVE IT!</span>
                 <h2 class="mb-2">좋아요한 글</h2>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">습관 7계명. 오늘도 망설이시나요</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.26</a></div>
-                    <div><a href="#">하루</a></div>
-                     <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                     <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                     <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                   </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">제가 매일 운동을 결심했던 이유</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.20</a></div>
-                    <div><a href="#">해빗이</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                    <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                    <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/resources/images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">일기쓰기가 습관이 되었습니다</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">2020.07.23</a></div>
-                    <div><a href="#">습관지키미</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                    <div><a href="#" ><span class="fas fa-user-clock"></span> 3</a></div>
-                    <div><a href="#" ><span class="far fa-thumbs-up"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-
+              <c:forEach items="${likeBoardList}" var="board">
+              	<div class="block-21 mb-4 d-flex" style="border: 1px solid rgba(0, 0, 0,0.2); background-color:rgba(230, 230, 230,0.2); padding:10px;">
+	                <a href="/board/list?b_num=<c:out value='${board.b_num}'/>" class="blog-img mr-4" style="background-image: url(/resources/images/image_1.jpg);"></a>
+	                <div class="text">
+	                  <h2 class="heading"><a href="/board/list?b_num=<c:out value='${board.b_num}'/>">[<c:out value="${board.c_name}"/>] <c:out value="${board.b_title}"/></a></h2>
+	                  <div class="meta mb-3">
+	                    <div>
+							<fmt:formatDate value="${board.b_writeDate}"/>
+	                    </div>
+	                    <div><c:out value="${board.m_name}"/></div>
+	                    <div><span class="icon-chat"></span> <c:out value="${board.b_replyCount}"/></div>
+	                    <div><span class="fas fa-user-clock"></span> <c:out value="${board.b_readCount}"/></div>
+	                    <div><span class="far fa-thumbs-up"></span> <c:out value="${board.b_likeCount}"/></div>
+	                  </div>
+	                </div>
+	             </div>
+              </c:forEach>
+              
               <div class="block-27" style="text-align: center;">
                 <ul>
                   <li><a href="#">&lt;</a></li>

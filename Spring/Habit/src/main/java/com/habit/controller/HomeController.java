@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.habit.service.AttendanceService;
+import com.habit.service.BoardService;
 import com.habit.service.MemberService;
+import com.habit.service.HomeService;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -36,6 +38,11 @@ public class HomeController {
 	@Setter(onMethod_=@Autowired )
 	private MemberService memberService;
 	
+	@Setter(onMethod_=@Autowired )
+	private BoardService boardService;
+	
+	@Setter(onMethod_=@Autowired )
+	private HomeService homeService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -50,6 +57,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		model.addAttribute("list", homeService.getListBestBoard());
+		log.info(homeService.getListBestBoard());
+		
 		return "home";
 	}
 	
@@ -57,6 +67,8 @@ public class HomeController {
 	public void myPage(@RequestParam("m_num") Long m_num, Model model) {
 		log.info(m_num);
 		model.addAttribute("member", memberService.readMember(m_num));
+		model.addAttribute("myBoardList", boardService.getListMyBoard(m_num));
+		model.addAttribute("likeBoardList", boardService.getListLikeBoard(m_num));
 		
 	}
 }

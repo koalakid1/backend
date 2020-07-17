@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.habit.mapper.HomeMapper">
+
+<resultMap type="com.habit.domain.BoardVO" id="BoardVO">
+    <result column="b_num" property="b_num"/>
+    <result column="m_num" property="m_num"/>
+    <result column="c_num" property="c_num"/>
+    <result column="b_title" property="b_title"/>
+    <result column="b_writedate" property="b_writedate"/>
+    <result column="b_updatedate" property="b_updatedate"/>
+    <result column="b_content" property="b_content"/>
+    <result column="b_readcount" property="b_readcount"/>
+    <result column="b_likecount" property="b_likecount"/>
+</resultMap>
+ 
+<resultMap type="com.habit.domain.MemberVO" id="MemberVO">
+    <result column="m_num" property="m_num"/>
+    <result column="m_email" property="m_email"/>
+    <result column="m_name" property="m_name"/>
+    <result column="m_pw" property="m_pw"/>
+    <result column="m_rank" property="m_rank"/>
+    <result column="m_intro" property="m_intro"/>
+    <result column="m_count" property="m_count"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.CategoryVO" id="CategoryVO">
+    <result column="c_num" property="c_num"/>
+    <result column="c_name" property="c_name"/>
+</resultMap>
+
+<select id="getListBestBoard" resultType="com.habit.domain.BoardDTO">
+<![CDATA[
+select b.b_num, b.c_num, c.c_name, m.m_name, b_title, b_writeDate, b.b_readCount, b.b_likeCount
+from hboard b full outer join hmember m on b.m_num=m.m_num full outer join hcategory c on b.c_num=c.c_num where b_writedate BETWEEN sysdate-7 AND TRUNC(LAST_DAY(SYSDATE))+0.99999421 order by b.b_likeCount desc, b.b_readCount desc
+
+]]>
+
+</select>
+</mapper>

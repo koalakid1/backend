@@ -4,14 +4,74 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.habit.mapper.BoardMapper">
 
-<select id="getList" resultType="com.habit.domain.BoardVO">
-<![CDATA[
-select * from hboard where b_num > 0
-]]>
+<resultMap type="com.habit.domain.MemberVO" id="memberMap">
+	<id property="m_num" column="m_num"/>
+	<result property="m_email" column="m_email"/>
+	<result property="m_name" column="m_name"/>
+	<result property="m_pw" column="m_pw"/>
+	<result property="m_rank" column="m_rank"/>
+	<result property="m_intro" column="m_intro"/>
+	<result property="m_count" column="m_count"/>
+	
+</resultMap>
 
+<resultMap type="com.habit.domain.BoardVO" id="BoardMap">
+	<id property="b_num" column="b_num"/>
+	<result property="c_num" column="c_num"/>
+	<result property="m_num" column="m_num"/>
+	<result property="b_title" column="b_title"/>
+	<result property="b_writeDate" column="b_writeDate"/>
+	<result property="b_updateDate" column="b_updateDate"/>
+	<result property="b_content" column="b_content"/>
+	<result property="b_readCount" column="b_readCount"/>
+	<result property="b_likeCount" column="b_likeCount"/>
+	<result property="b_replyCount" column="b_replyCount"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.BoardDTO" id="boardDTOMap">
+	<result property="b_num" column="b_num"/>
+	<result property="c_num" column="c_num"/>
+	<result property="c_name" column="c_name"/>
+	<result property="m_name" column="m_name"/>
+	<result property="b_title" column="b_title"/>
+	<result property="b_content" column="b_content"/>
+	<result property="b_writeDate" column="b_writeDate"/>
+	<result property="b_readCount" column="b_readCount"/>
+	<result property="b_likeCount" column="b_likeCount"/>
+	<result property="b_replyCount" column="b_replyCount"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.CategoryVO" id="categoryMap">
+	<id property="c_num" column="c_num"/>
+	<result property="c_name" column="c_name"/>
+</resultMap>
+
+<resultMap type="com.habit.domain.LikeVO" id="likeMap">
+	<id property="b_num" column="b_num"/>
+	<id property="m_num" column="m_num"/>
+</resultMap>
+
+<select id="getList" resultMap="boardDTOMap">
+	select b.b_num, b.c_num, m.m_name, b_title, b.b_writeDate,  b.b_readCount, b.b_likeCount, b.b_replyCount
+	from hboard b inner join hmember m on b.m_num = m.m_num
+	order by b_writeDate desc
 </select>
 
 <select id="read" resultType="com.habit.domain.BoardVO">
 	select * from hboard where b_num = #{b_num}
+</select>
+
+<select id="getListMyBoard" resultMap="boardDTOMap">
+	select b.b_num, b.c_num, m.m_name, b_title, b.b_writeDate,  b.b_readCount, b.b_likeCount, b.b_replyCount, c.c_name
+	from hboard b,hmember m, hcategory c
+	where b.m_num = #{m_num} and b.m_num = m.m_num and c.c_num = b.c_num
+	order by b_writeDate desc
+</select>
+
+<select id="getListLikeBoard" resultMap="boardDTOMap">
+	select b.b_num, b.c_num, m.m_name, b_title, b.b_writeDate,  b.b_readCount, b.b_likeCount, b.b_replyCount , c.c_name
+	from hboard b,hmember m, hlike l, hcategory c
+	where l.m_num = #{m_num} and l.b_num = b.b_num and b.m_num = m.m_num and c.c_num = b.c_num
+	order by b_writeDate desc
 </select>
 </mapper>
