@@ -4,6 +4,8 @@ import com.everysports.user.domain.EClass;
 import com.everysports.user.repository.EClassRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EClassService {
 
@@ -17,5 +19,7 @@ public class EClassService {
     public EClass addEClass(EClass eClass){
         return eClassRepository.save(eClass);
     }
+
+    public List<EClass> getEClasses(){ return eClassRepository.findAll(); }
 
 }

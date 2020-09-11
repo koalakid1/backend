@@ -1,9 +1,6 @@
 package com.everysports.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
+@ToString
+@EqualsAndHashCode
 public class EUser {
     @Id
     @GeneratedValue
@@ -38,4 +37,5 @@ public class EUser {
 
     @NotNull
     private Integer user_Point;
+
 }

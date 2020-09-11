@@ -1,17 +1,12 @@
 package com.everysports.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -27,7 +22,7 @@ public class EClass {
     @NotNull
     private Long teacher_ID;
 
-    @NotEmpty
+    @NotNull
     private String class_Name;
 
     @NotNull
@@ -36,10 +31,10 @@ public class EClass {
     @NotNull
     private Long class_Category;
 
-    @NotEmpty
+    @NotNull
     private String class_Curriculum;
 
-    @NotEmpty
+    @NotNull
     private String class_Policy;
 
     @NotNull
@@ -51,7 +46,11 @@ public class EClass {
     @NotNull
     private Long class_Lowerbound;
 
-    @NotEmpty
+    @NotNull
     private Date class_OpenDate;
+
+    @Transient
+    private List<EClassAttach> eClassAttaches;
+
 
 }
