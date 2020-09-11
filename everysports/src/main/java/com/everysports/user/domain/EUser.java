@@ -37,5 +37,5 @@ public class EUser {
     private String user_Phone;
 
     @NotNull
-    private Long user_Point;
+    private Integer user_Point;
 }

@@ -4,6 +4,8 @@ import com.everysports.user.domain.EUser;
 import com.everysports.user.repository.EUserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EUserService {
 
@@ -15,5 +17,10 @@ public class EUserService {
 
     public EUser addEUser(EUser eUser) {
         return eUserRepository.save(eUser);
+    }
+
+    public List<EUser> getEUsers() {
+        List<EUser> eUsers = eUserRepository.findAll();
+        return eUsers;
     }
 }
