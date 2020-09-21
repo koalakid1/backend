@@ -2,40 +2,40 @@ package com.everysports.user.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
-@Data
-@Builder
+@AllArgsConstructor
 @ToString
+@Data
 @EqualsAndHashCode
 public class EUser {
     @Id
     @GeneratedValue
+    @NonNull
     private Long user_ID;
 
-    @NotNull
+    @NonNull
     private String user_Email;
 
-    @NotNull
+    @NonNull
     private String user_Name;
 
-    @NotNull
+    @NonNull
     private boolean user_Gender;
 
-    @NotNull
+    @NonNull
     private Date user_Birthday;
 
-    @NotNull
+    @NonNull
     private String user_Phone;
 
-    @NotNull
+    @NonNull
     private Integer user_Point;
 
 }

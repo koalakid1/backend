@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>492c4b85-e06f-458a-b6b4-ea60c9f415bc.SCHEMA:EverySports</OriginalElement>
+  <nodes>
+    <node x="684.3809523809523" y="483.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacherSchedule</node>
+    <node x="0.0" y="944.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHwAttach</node>
+    <node x="511.13095238095235" y="730.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClassAttach</node>
+    <node x="23.0" y="708.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHwScore</node>
+    <node x="414.0" y="922.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eReview</node>
+    <node x="544.375" y="126.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacher</node>
+    <node x="788.375" y="181.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eProfile</node>
+    <node x="589.5" y="0.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eAll</node>
+    <node x="212.0" y="922.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClassSchedule</node>
+    <node x="187.12499999999994" y="137.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUser</node>
+    <node x="435.38095238095235" y="384.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClass</node>
+    <node x="10.0" y="472.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHw</node>
+    <node x="338.13095238095235" y="741.0">492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUserClass</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHwScore" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHw">
+      <point x="0.0" y="-82.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHw" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUser">
+      <point x="0.0" y="-49.0" />
+      <point x="96.0" y="359.0" />
+      <point x="231.12499999999994" y="359.0" />
+      <point x="-44.0" y="93.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacher" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eAll">
+      <point x="0.0" y="-104.0" />
+      <point x="656.375" y="101.0" />
+      <point x="650.5" y="101.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eProfile" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eAll">
+      <point x="0.0" y="-49.0" />
+      <point x="884.375" y="101.0" />
+      <point x="691.1666666666666" y="101.0" />
+      <point x="40.66666666666663" y="38.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUserClass" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClass">
+      <point x="38.25" y="-49.0" />
+      <point x="452.88095238095235" y="683.0" />
+      <point x="492.63095238095235" y="683.0" />
+      <point x="-57.25" y="137.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClass" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacher">
+      <point x="0.0" y="-137.0" />
+      <point x="549.8809523809523" y="359.0" />
+      <point x="600.375" y="359.0" />
+      <point x="-56.0" y="104.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacherSchedule" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacher">
+      <point x="0.0" y="-38.0" />
+      <point x="758.3809523809523" y="359.0" />
+      <point x="712.375" y="359.0" />
+      <point x="56.0" y="104.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHwAttach" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eHwScore">
+      <point x="0.0" y="-49.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eReview" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUserClass">
+      <point x="0.0" y="-71.0" />
+      <point x="519.0" y="897.0" />
+      <point x="452.88095238095235" y="897.0" />
+      <point x="38.25" y="49.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUser" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eAll">
+      <point x="0.0" y="-93.0" />
+      <point x="275.12499999999994" y="101.0" />
+      <point x="609.8333333333334" y="101.0" />
+      <point x="-40.66666666666663" y="38.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClassAttach" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClass">
+      <point x="0.0" y="-60.0" />
+      <point x="57.25" y="137.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUserClass" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUser">
+      <point x="-38.25" y="-49.0" />
+      <point x="376.38095238095235" y="359.0" />
+      <point x="319.12499999999994" y="359.0" />
+      <point x="44.0" y="93.0" />
+    </edge>
+    <edge source="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eClassSchedule" target="492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eUserClass">
+      <point x="0.0" y="-71.0" />
+      <point x="303.0" y="897.0" />
+      <point x="376.38095238095235" y="897.0" />
+      <point x="-38.25" y="49.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5249077490774908" x="482.5" y="542.0" />
+  <SelectedNodes>
+    <node>492c4b85-e06f-458a-b6b4-ea60c9f415bc.TABLE:EverySports.eTeacherSchedule</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
